@@ -1,0 +1,40 @@
+global class {{ class }} implements Database.Batchable<Sobject>, {{ opt: Database.Stateful, Database.AllowsCallouts }}
+{
+    /*
+     *  ctor
+     */
+    global {{ class }} ( {{ opt_params }} )
+    {
+        // batch setup logic
+    }
+    
+    
+    /*
+     *  Fetches data to be chunked and processed
+     */
+    global Database.QueryLocator start(Database.BatchableContext bc)
+    {
+        return Database.getQuerylocator( {{ queryString }} );
+    }
+    
+    
+    /*
+     *  Processes record chunks (scope) in QueryLocator
+     */
+    global void execute(Database.BatchableContext bc, List<Sobject> scope)
+    {
+        for (Sobject s : scope)
+        {
+            // processing logic
+        }
+    }
+    
+    /*
+     *  Performs closing actions
+     *  e.g. send email notification, store results in a table, or cleanup
+     */
+    global void finish(Database.BatchableContext bc)
+    {
+        // finishing logic
+    }
+}
